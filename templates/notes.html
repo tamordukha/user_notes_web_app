@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>notes</title>
+</head>
+
+<h1>My notes</h1>
+<ul>
+    {% for note in notes %}
+    <h3>{{ note["title"] }}</h3>
+    <p>{{ note["content"] }}</p>
+    <small>{{ note["created_at"] }}</small>
+    {% endfor %}
+</ul>
+
+<a href="/create">Create new note</a>
+
+</html>
