@@ -26,7 +26,10 @@ def login():
         user = cursor.fetchone()
         conn.close()
 
-        if user:
+        if "user_id" not in session:
+            return redirect("/login")
+
+        elif user:
             session["user_id"] = user["id"] 
             return redirect("/notes")
         else:
@@ -57,6 +60,28 @@ def register():
         return redirect("/login")
     
     return render_template("register.html")
+
+@app.route("/notes")
+def notes():
+    if "user_id" not in session:
+        return redirect("/login")
+
+    user_id = session["user_id"]
+
+    conn = sqlite3.connect("database.db")
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+
+    query = "SELECT * FROM notes WHERE user_id = ?"
+    cursor.execute(
+        query,
+        (user_id,)
+    )
+    notes = cursor.fetchall()
+    conn.close()
+
+    return render_template("notes.html", notes=notes)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
