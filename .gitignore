@@ -1,0 +1,21 @@
+# Database
+*.db
+*.sqlite3
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Flask/Dash
+instance/
+.webassets-cache
+
+# Operating system
+.DS_Store
+Thumbs.db
