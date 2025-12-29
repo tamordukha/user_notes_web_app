@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+</head>
+<body>
+    <h2>Adding a new note</h2>
+
+    <form method="POST">
+        <p>
+            <label>Title:</label>
+            <input type="text" name="title" required>
+        </p>
+
+        <p>
+            <label>Content:</label>
+            <textarea name="content" rows="7"></textarea>
+        </p>
+
+
+        <button type="submit">Save</button>
+        <a href="{{ url_for('notes') }}">
+            <button type="button">Back</button>
+        </a>
+
+
+    </form>
+    
+</body>
+
+</html>
