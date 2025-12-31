@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>notes</title>
+    <title>{{title}}</title>
 </head>
 
 <h1>My notes</h1>
 <ul>
     {% for note in notes %}
-    <h3>{{ note["title"] }}</h3>
-    <p>{{ note["content"] }}</p>
+    <h3>{{ note["title"] }}</h3> 
+    <p> - {{ note["content"] }}</p>
     <small>{{ note["created_at"] }}</small>
+    <a href="/notes/edit/{{ note.id }}">edit note</a>
+    <form action="{{ url_for('delete', note_id=note.id) }}" method="post">
+        <button type="submit">Delete</button>
+    </form>
     {% endfor %}
 </ul>
 
-<a href="/create">Create new note</a>
+        
+
+<a href="notes/create">Create new note</a>
 
 </html>
