@@ -2,16 +2,19 @@
 <html>
 <head>
     <title>{{title}}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <h1>My notes</h1>
 <ul>
     {% for note in notes %}
-    <h3>{{ note["title"] }}</h3> 
-    <p> - {{ note["content"] }}</p>
-    <small>{{ note["created_at"] }}</small>
+    <div class="note">
+        <h3>{{ note["title"] }}</h3> 
+        <p> - {{ note["content"] }}</p>
+        <small>{{ note["created_at"] }}</small>
+    </div>
     <a href="/notes/edit/{{ note.id }}">edit note</a>
-    <form action="{{ url_for('delete', note_id=note.id) }}" method="post">
+    <form class="delete-form" action="{{ url_for('delete', note_id=note.id) }}" method="post">
         <button type="submit">Delete</button>
     </form>
     {% endfor %}
@@ -19,7 +22,10 @@
 
         
 
-<a href="notes/create">Create new note</a>
-<a href="/logout">Logout</a>
+<div class="actions">
+    <a href="/notes/create">Create new note</a><br>
+    <a href="/logout">Logout</a>
+</div>
+
 
 </html>

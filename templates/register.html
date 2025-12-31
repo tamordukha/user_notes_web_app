@@ -1,4 +1,26 @@
 <!DOCTYPE html>
 <html>
-    <p>register working</p>
+<head>
+    <title>register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <h1>Register</h1>
+    <form class="auth-form" method="post">
+        <h3>
+            <label>Username: </label>
+            <input type="text" name="username" required>
+        </h3>
+        <h3>
+            <label>Password: </label>
+            <input type="text" name="password" required>
+        </h3>
+
+        <button type="submit">submit</button>
+    </form>
+
+    <a href="/login">back to login</a>
+</body>
+    
 </html>

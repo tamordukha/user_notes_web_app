@@ -1,5 +1,27 @@
 <!DOCTYPE html>
 <html>
-    <p>login working</p>
-    <a href="/register">regist</a>
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <h1>Login</h1>
+    <form class="auth-form" method="post">
+        <h3>
+            <label>Username: </label>
+            <input type="text" name="username" required>
+        </h3>
+        <h3>
+            <label>Password: </label>
+            <input type="text" name="password" required>
+        </h3>
+
+        <button type="submit">submit</button>
+    </form>
+
+    <a href="/register">register</a>
+</body>
+    
 </html>
