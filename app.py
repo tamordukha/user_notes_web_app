@@ -4,6 +4,7 @@ import sqlite3
 
 app = Flask(__name__)
 app.secret_key = "something-secret"
+app.config["DATABASE"] = "database.db"
 
 @app.route("/")
 def index():
@@ -15,7 +16,7 @@ def login():
         username = request.form.get("username")
         password = request.form.get("password")
 
-        conn = sqlite3.connect("database.db")
+        conn = sqlite3.connect(app.config["DATABASE"])
         conn.row_factory = sqlite3.Row
         cursor = conn.cursor()
 
@@ -41,7 +42,7 @@ def register():
         username = request.form.get("username")
         password = request.form.get("password")
 
-        conn = sqlite3.connect('database.db')
+        conn = sqlite3.connect(app.config["DATABASE"])
         cursor = conn.cursor()
 
         query = "INSERT INTO users (username, password) VALUES (?, ?)"
@@ -65,7 +66,7 @@ def notes():
 
     user_id = session["user_id"]
 
-    conn = sqlite3.connect("database.db")
+    conn = sqlite3.connect(app.config["DATABASE"])
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
 
@@ -91,7 +92,7 @@ def create():
         content = request.form.get("content")
         created_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-        conn = sqlite3.connect("database.db")
+        conn = sqlite3.connect(app.config["DATABASE"])
         cursor = conn.cursor()
 
         query = "INSERT INTO notes (user_id, title, content, created_at) VALUES (?, ?, ?, ?)"
@@ -111,7 +112,7 @@ def edit(note_id):
 
     user_id = session["user_id"]
 
-    conn = sqlite3.connect("database.db")
+    conn = sqlite3.connect(app.config["DATABASE"])
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
 
@@ -150,9 +151,7 @@ def delete(note_id):
     if "user_id" not in session:
         return redirect("/login")
 
-    #user_id = session["user_id"]
-
-    conn = sqlite3.connect("database.db")
+    conn = sqlite3.connect(app.config["DATABASE"])
     cursor = conn.cursor()
 
     cursor.execute(
